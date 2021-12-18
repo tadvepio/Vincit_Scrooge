@@ -1,0 +1,24 @@
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    console.log(<%= labels %>)
+    let labels = [<%= labels %>]
+    let labels2 = []
+    labels.forEach(element => {
+        labels2.push(element.toString())
+    });
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+                labels: labels2,
+                datasets: [{
+                    label: 'Bitcoin value',
+                    data: [<%= values %>]
+                }]
+            
+        }
+        });
+</script>
