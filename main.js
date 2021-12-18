@@ -12,7 +12,8 @@ app.use(express.urlencoded({
 }));
 app.use(layout);
 
-app.get("/", homeController.getParams, homeController.getData, homeController.index);
+app.get("/", homeController.index);
+app.post("/", homeController.getParams, homeController.getData, homeController.formatForChart, homeController.calcBearAndHigh, homeController.index)
 
 app.listen(app.get("port"), () => {
     console.log(`Server started, running in: http://localhost:3000`)

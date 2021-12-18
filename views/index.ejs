@@ -1,24 +1,51 @@
 <div>
     <canvas id="myChart"></canvas>
 </div>
+
+<div>
+    <form action="/" method="POST">
+        <label for="startDate" >Start Date</label>
+        <input type="date" name="startdate" id="inputSD" placeholder="MM/DD/YYYY">
+        <label name="ed">End Date</label>
+        <input type="date" name="enddate" id="inputED" placeholder="MM/DD/YYYY">
+        <button type="submit">Get data</button>
+    </form>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    console.log(<%= labels %>)
-    let labels = [<%= labels %>]
-    let labels2 = []
-    labels.forEach(element => {
-        labels2.push(element.toString())
-    });
+    var labels = [<%= labels %>];
+    let labs = []
+    labels.forEach(item => {
+        let timeStamp = parseInt(item);            
+        let toMill = timeStamp;
+        let dateObj = new Date(toMill)
+        let y = dateObj.toLocaleDateString("en-US", {timeZone: 'UTC'})
+        labs.push(y)
+    })
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-                labels: labels2,
+                labels: labs,
                 datasets: [{
-                    label: 'Bitcoin value',
+                    backgroundColor: 'rgb(65,105,225)',
+                    label: 'Bitcoin exchange rate',
                     data: [<%= values %>]
                 }]
             
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
         }
         });
 </script>
