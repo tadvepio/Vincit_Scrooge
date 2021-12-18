@@ -11,6 +11,28 @@
         <button type="submit">Get data</button>
     </form>
 </div>
+<div>
+    <table>
+        <tr>
+            <th>Highest exchange value</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+            <td><%= highest %>€</td>
+            <td><%= highestDate %></td>
+        </tr>
+        <tr>
+            <th>Longest bearing</th>
+            <th>From</th>
+            <th>To</th>
+        </tr>
+        <tr>
+            <td><%= bearings[0] %></td>
+            <td id="from"></td>
+            <td id="to"></td>
+        </tr>
+    </table>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -22,13 +44,27 @@
         let dateObj = new Date(toMill)
         let y = dateObj.toLocaleDateString("en-US", {timeZone: 'UTC'})
         labs.push(y)
+    });
+
+    var bearingLabels = [<%= bearings[1] %>,<%= bearings[2] %>]
+    bearLabs = []
+    bearingLabels.forEach(item => {
+        let timeStamp = parseInt(item);            
+        let toMill = timeStamp;
+        let dateObj = new Date(toMill)
+        let y = dateObj.toLocaleDateString("en-US", {timeZone: 'UTC'})
+        bearLabs.push(y)
     })
+        document.getElementById('from').innerHTML = bearLabs[0]
+        document.getElementById('to').innerHTML = bearLabs[1]
+
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
                 labels: labs,
                 datasets: [{
+                    type: 'bar',
                     backgroundColor: 'rgb(65,105,225)',
                     label: 'Bitcoin exchange rate',
                     data: [<%= values %>]
