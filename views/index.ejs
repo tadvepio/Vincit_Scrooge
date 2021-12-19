@@ -18,7 +18,7 @@
             <th>Date</th>
         </tr>
         <tr>
-            <td><%= highest %>€</td>
+            <td><%= highest.toFixed(2) %> €</td>
             <td><%= highestDate %></td>
         </tr>
         <tr>
@@ -30,6 +30,20 @@
             <td><%= bearings[0] %></td>
             <td id="from"></td>
             <td id="to"></td>
+        </tr>
+        <tr>
+            <th>Invest Date</th>
+            <th>Invest Price</th>
+            <th>Sell Date</th>
+            <th>Selling Price</th>
+            <th>Profit</th>
+        </tr>
+        <tr>
+            <td><%= investmentInfo[1] %></td>
+            <td><%= investmentInfo[2].toFixed(2) %> €</td>
+            <td><%= investmentInfo[3] %></td>
+            <td><%= investmentInfo[4].toFixed(2) %> €</td>
+            <td><%= investmentInfo[0].toFixed(2) %> €</td>
         </tr>
     </table>
 </div>
