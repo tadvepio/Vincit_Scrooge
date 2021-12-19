@@ -59,7 +59,6 @@ module.exports = {
         sellDate = y2
 
         res.locals.investmentInfo = [profit, investDate, investPrice, sellDate, sellPrice]
-        console.log(res.locals.investmentInfo)
         next();
     },
     calcBearAndHigh: (req, res, next) => {

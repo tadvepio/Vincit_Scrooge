@@ -1,53 +1,88 @@
-<div>
-    <canvas id="myChart"></canvas>
+<div class="grid-container grid-container--fit">
+<div class="item1">
+    <div class="chartWrapper">
+        <canvas id="myChart"></canvas>
+    </div>
+    <% if (labels == "") {%>
+        <h1>Invalid dates</h1>
+        <div><img src="https://c.tenor.com/8JuvSkq_MIAAAAAM/picsou-scrooge.gif" style="width:30%;"></div>
+        <% } %>
 </div>
 
-<div>
+<div class="item2">
+    <div>
+        <img src="./images/scrooge_logo.png">
+        <h1 style="margin-top:0; padding-top: 0;">Scrooge McDucks Bitcoin Analyzer</h1>
+        <p>Pick a start date and an end date below to get a chart containig bitcoinvalues and tables containing additional information!</p>
+    </div>
     <form action="/" method="POST">
         <label for="startDate" >Start Date</label>
-        <input type="date" name="startdate" id="inputSD" placeholder="MM/DD/YYYY">
+        <input type="date" name="startdate" id="inputSD">
         <label name="ed">End Date</label>
-        <input type="date" name="enddate" id="inputED" placeholder="MM/DD/YYYY">
+        <input type="date" name="enddate" id="inputED">
         <button type="submit">Get data</button>
     </form>
 </div>
-<div>
+<div class="item3">
     <table>
+        <thead>Highest value</thead>
         <tr>
-            <th>Highest exchange value</th>
-            <th>Date</th>
+            <th>Value:</th>
+            <td><%= highest.toFixed(2) %>€</td>
         </tr>
         <tr>
-            <td><%= highest.toFixed(2) %> €</td>
+            <th>Date:</th>
             <td><%= highestDate %></td>
-        </tr>
-        <tr>
-            <th>Longest bearing</th>
-            <th>From</th>
-            <th>To</th>
-        </tr>
-        <tr>
-            <td><%= bearings[0] %></td>
-            <td id="from"></td>
-            <td id="to"></td>
-        </tr>
-        <tr>
-            <th>Invest Date</th>
-            <th>Invest Price</th>
-            <th>Sell Date</th>
-            <th>Selling Price</th>
-            <th>Profit</th>
-        </tr>
-        <tr>
-            <td><%= investmentInfo[1] %></td>
-            <td><%= investmentInfo[2].toFixed(2) %> €</td>
-            <td><%= investmentInfo[3] %></td>
-            <td><%= investmentInfo[4].toFixed(2) %> €</td>
-            <td><%= investmentInfo[0].toFixed(2) %> €</td>
         </tr>
     </table>
 </div>
-
+<div class="item4">
+    <table>
+        <thead>Bearing</thead>
+        <tr>
+            <th>Bearing time</th>
+            <td><%= bearings[0] %> days</td>
+        </tr>
+        <tr>
+            <th>Start</th>
+            <td id="from"></td>
+        </tr>
+        <tr>
+            <th>End</th>
+            <td id="to"></td>
+        </tr>
+    </table>
+</div>
+<div class="item5">
+    <table>
+        <thead>Investment</thead>
+        <% if (investmentInfo[0].toFixed(2) <= 0) { %>
+            <tr><th>No investment opportunities</th></tr>
+        <% } else { %> 
+        <tr>
+            <th>Invest Date</th>
+            <td><%= investmentInfo[1] %></td>
+        </tr>
+        <tr>
+            <th>Invest Price</th>
+            <td><%= investmentInfo[2].toFixed(2) %>€</td>
+        </tr>
+        <tr>
+            <th>Sell Date</th>
+            <td><%= investmentInfo[3] %></td>
+        </tr>
+        <tr>
+            <th>Selling Price</th>
+            <td><%= investmentInfo[4].toFixed(2) %>€</td>
+        </tr>
+        <tr>
+            <th>Profit</th>
+            <td><%= investmentInfo[0].toFixed(2) %>€</td>
+        </tr>
+        <% } %>
+    </table>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var labels = [<%= labels %>];
@@ -60,6 +95,8 @@
         labs.push(y)
     });
 
+    console.log(<%=highest %>)
+
     var bearingLabels = [<%= bearings[1] %>,<%= bearings[2] %>]
     bearLabs = []
     bearingLabels.forEach(item => {
@@ -69,8 +106,13 @@
         let y = dateObj.toLocaleDateString("en-US", {timeZone: 'UTC'})
         bearLabs.push(y)
     })
-        document.getElementById('from').innerHTML = bearLabs[0]
-        document.getElementById('to').innerHTML = bearLabs[1]
+        if (bearLabs.length !== 0) {
+            document.getElementById('from').innerHTML = bearLabs[0]
+            document.getElementById('to').innerHTML = bearLabs[1]
+        } else {
+            document.getElementById('from').innerHTML = "0"
+            document.getElementById('to').innerHTML = "0"
+        }
 
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
@@ -79,7 +121,7 @@
                 labels: labs,
                 datasets: [{
                     type: 'bar',
-                    backgroundColor: 'rgb(65,105,225)',
+                    backgroundColor: '#124670',
                     label: 'Bitcoin exchange rate',
                     data: [<%= values %>]
                 }]

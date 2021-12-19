@@ -1,0 +1,86 @@
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "menu menu menu menu menu menu"
+    "left header header header header header"
+    "middle header header header header header"
+    "right header header header header header";
+  grid-gap: 10px;
+  background-color: #124670;
+  padding: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 10px;
+}
+
+.grid-container--fit {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+form,
+label,
+input,
+button {
+  font-size: 1vw;
+  padding: 5px;
+}
+
+button {
+  border-radius: 30%;
+}
+
+table,
+th,
+td {
+  background-color: #fff;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 100%;
+  font-size: 1vw;
+  border-radius: 5%;
+  border: 1px solid;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.item1 {
+  grid-area: header;
+}
+.item2 {
+  grid-area: menu;
+}
+.item3 {
+  grid-area: left;
+}
+.item4 {
+  grid-area: middle;
+}
+.item5 {
+  grid-area: right;
+}
+
+h1 {
+  font-size: 2vw;
+}
+
+img {
+  border-radius: 90%;
+  width: 10%;
+}
+
+.chartWrapper {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+}
