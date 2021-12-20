@@ -30,6 +30,7 @@ Dependencies:
 7. Have fun!
 
 <h2>Browser view</h2>
+
 ![skryyts](https://user-images.githubusercontent.com/32989919/146695788-543a2ee5-8a9f-4b22-9522-55bee3506ebc.png)
 
 
