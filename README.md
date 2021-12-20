@@ -1,13 +1,13 @@
-# Vincit_Scrooge
+# Scrooge McDucks Bitcoin Analyzer
 
 <h2>Description:</h2>
 
 Vincit rising start preassignment:
 
-1. Scrooge is able to get and view information about data in the time period he wants.
+1. Scrooge is able to view bitcoin information in the time period he wants.
 2. Longes bearing or in other words most days in a row when bitcoin lost value.
 3. Highest value in given time period.
-4. Scrooge want to know when to invest and sell to get most profit, with a  timemachine ofcourse.
+4. Scrooge want to know when to invest and sell to get most profit, with a timemachine ofcourse.
 
 Dependencies:
 
@@ -29,5 +29,7 @@ Dependencies:
 6. Open the site on localhost port 3000
 7. Have fun!
 
-Browser view
-![skryyts](https://user-images.githubusercontent.com/32989919/146695395-371d9ce8-37b4-4802-8008-77e1694caf26.png)
+<h2>Browser view</h2>
+![skryyts](https://user-images.githubusercontent.com/32989919/146695788-543a2ee5-8a9f-4b22-9522-55bee3506ebc.png)
+
+
